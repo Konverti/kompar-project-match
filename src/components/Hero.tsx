@@ -31,7 +31,7 @@ const Hero = ({ onStartQuiz }: HeroProps) => {
             size="lg"
             className="text-lg px-8 py-6 h-auto"
           >
-            Commencer mon projet
+            OBTENIR MES SOUMISSIONS
             <ArrowRight className="ml-2" />
           </Button>
         </div>

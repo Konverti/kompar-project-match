@@ -217,35 +217,27 @@ const Quiz = ({ onClose }: QuizProps) => {
 
   if (disqualified) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <Disqualification reason={disqualified} onBack={handleBack} />
-        </div>
+      <div className="animate-fade-in">
+        <Disqualification reason={disqualified} onBack={handleBack} />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-12">
+    <div className="space-y-8">
       <div className="max-w-4xl mx-auto">
         {currentStep < 7 && (
           <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
+            <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
+            <div className="text-center mt-2">
               <span className="text-sm font-medium text-muted-foreground">
                 Étape {currentStep} sur {TOTAL_STEPS}
               </span>
-              <button
-                onClick={onClose}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Quitter
-              </button>
             </div>
-            <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
           </div>
         )}
 
-        <div className="bg-card rounded-2xl shadow-strong p-6 md:p-10">
+        <div>
           {currentStep === 1 && (
             <StepOne
               value={quizData.projectType}

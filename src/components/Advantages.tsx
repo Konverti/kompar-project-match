@@ -1,4 +1,4 @@
-import { Shield, Clock, ThumbsUp, TrendingDown } from "lucide-react";
+import { Shield, Clock, ThumbsUp } from "lucide-react";
 
 const Advantages = () => {
   const advantages = [
@@ -11,11 +11,6 @@ const Advantages = () => {
       icon: Clock,
       title: "Gain de temps",
       description: "Plus besoin de chercher pendant des heures. Recevez 3 soumissions pertinentes en 48h maximum."
-    },
-    {
-      icon: TrendingDown,
-      title: "Meilleur prix",
-      description: "La compétition entre entrepreneurs vous garantit des prix justes et compétitifs."
     },
     {
       icon: ThumbsUp,
@@ -36,7 +31,7 @@ const Advantages = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {advantages.map((advantage, index) => (
             <div 
               key={index}
