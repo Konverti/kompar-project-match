@@ -21,7 +21,7 @@ const StepFour = ({ value, onChange }: StepFourProps) => {
             <Calendar className="w-8 h-8 text-primary" />
           </div>
         </div>
-        <h2 className="text-3xl font-bold text-foreground">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Quand souhaitez-vous débuter les travaux?
         </h2>
         <p className="text-muted-foreground">
@@ -29,7 +29,7 @@ const StepFour = ({ value, onChange }: StepFourProps) => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {timelines.map((timeline) => (
           <button
             key={timeline.id}

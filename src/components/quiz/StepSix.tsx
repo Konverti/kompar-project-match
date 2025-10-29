@@ -36,7 +36,7 @@ const StepSix = ({
             <User className="w-8 h-8 text-primary" />
           </div>
         </div>
-        <h2 className="text-3xl font-bold text-foreground">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Comment peut-on vous joindre?
         </h2>
         <p className="text-muted-foreground">

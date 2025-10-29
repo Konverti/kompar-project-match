@@ -30,7 +30,7 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
             <DollarSign className="w-8 h-8 text-accent" />
           </div>
         </div>
-        <h2 className="text-3xl font-bold text-foreground">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Quel est votre budget estimé?
         </h2>
         <div className="bg-accent-light border-l-4 border-primary p-4 rounded-r-lg">

@@ -16,7 +16,7 @@ const Footer = () => {
             <img 
               src={komparLogo} 
               alt="Kompar" 
-              className="h-8 w-auto mb-4"
+              className="h-12 w-auto mb-4"
             />
             <p className="text-sm text-muted-foreground">
               Votre partenaire de confiance pour vos projets de rénovation

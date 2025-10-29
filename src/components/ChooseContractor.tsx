@@ -29,9 +29,9 @@ const ChooseContractor = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-card">
+    <section className="py-12 md:py-20 px-4 bg-card">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-8 md:mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Comment bien choisir son entrepreneur
           </h2>

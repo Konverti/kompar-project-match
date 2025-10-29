@@ -17,7 +17,7 @@ const StepOne = ({ value, onChange }: StepOneProps) => {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold text-foreground">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Quel type de projet souhaitez-vous réaliser?
         </h2>
         <p className="text-muted-foreground">

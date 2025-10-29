@@ -2,9 +2,9 @@ import Quiz from "./Quiz";
 
 const QuizEmbed = () => {
   return (
-    <section id="quiz-form" className="bg-gradient-to-b from-background to-primary-light py-20 px-4">
+    <section id="quiz-form" className="bg-gradient-to-b from-background to-primary-light py-12 md:py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className="text-center mb-8 md:mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             Obtenez vos soumissions
           </h2>

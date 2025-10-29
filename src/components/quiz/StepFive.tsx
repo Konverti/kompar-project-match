@@ -42,7 +42,7 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
             <FileText className="w-8 h-8 text-accent" />
           </div>
         </div>
-        <h2 className="text-3xl font-bold text-foreground">
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Parlez-nous de votre projet
         </h2>
         <p className="text-muted-foreground">
@@ -73,7 +73,7 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
           </Label>
           
           {photos.length > 0 && (
-            <div className="grid grid-cols-3 gap-3 mb-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
               {photos.map((photo, index) => (
                 <div key={index} className="relative group">
                   <img 
