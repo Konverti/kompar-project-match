@@ -1,8 +1,15 @@
 const Footer = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-card border-t border-border py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-lg font-bold text-primary mb-4">Kompar</h3>
             <p className="text-sm text-muted-foreground">
@@ -11,33 +18,23 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">À propos</h4>
+            <h4 className="font-semibold mb-4">Liens utiles</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Notre histoire
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Notre équipe
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold mb-4">Services</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <button 
+                  onClick={() => scrollToSection('how-it-works')}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   Comment ça marche
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <button 
+                  onClick={() => scrollToSection('faq')}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   FAQ
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -46,13 +43,8 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Nous joindre
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Support
+                <a href="mailto:info@kompar.ca" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  info@kompar.ca
                 </a>
               </li>
             </ul>

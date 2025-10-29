@@ -42,7 +42,7 @@ const Hero = ({ onStartQuiz }: HeroProps) => {
             <div className="text-sm text-muted-foreground">Gratuit et sans engagement</div>
           </div>
           <div className="bg-card p-6 rounded-lg shadow-soft">
-            <div className="text-3xl font-bold text-accent mb-2">48h</div>
+            <div className="text-3xl font-bold text-primary mb-2">48h</div>
             <div className="text-sm text-muted-foreground">Pour recevoir vos soumissions</div>
           </div>
           <div className="bg-card p-6 rounded-lg shadow-soft">

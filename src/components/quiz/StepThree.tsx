@@ -7,13 +7,19 @@ interface StepThreeProps {
 
 const StepThree = ({ value, onChange }: StepThreeProps) => {
   const budgetRanges = [
-    { id: "less-10k", label: "Moins de 10 000$" },
-    { id: "10k-12k", label: "10 000$ - 12 000$" },
-    { id: "12k-15k", label: "12 000$ - 15 000$" },
-    { id: "15k-18k", label: "15 000$ - 18 000$" },
-    { id: "18k-21k", label: "18 000$ - 21 000$" },
-    { id: "21k-25k", label: "21 000$ - 25 000$" },
-    { id: "more-25k", label: "Plus de 25 000$" }
+    { id: "less-12k", label: "Moins de 12 000$" },
+    { id: "12k-14k", label: "12 000$ - 14 000$" },
+    { id: "14k-16k", label: "14 000$ - 16 000$" },
+    { id: "16k-18k", label: "16 000$ - 18 000$" },
+    { id: "18k-20k", label: "18 000$ - 20 000$" },
+    { id: "20k-22k", label: "20 000$ - 22 000$" },
+    { id: "22k-24k", label: "22 000$ - 24 000$" },
+    { id: "24k-26k", label: "24 000$ - 26 000$" },
+    { id: "26k-28k", label: "26 000$ - 28 000$" },
+    { id: "28k-30k", label: "28 000$ - 30 000$" },
+    { id: "30k-35k", label: "30 000$ - 35 000$" },
+    { id: "35k-40k", label: "35 000$ - 40 000$" },
+    { id: "more-40k", label: "40 000$ et plus" }
   ];
   
   return (
@@ -27,12 +33,19 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
         <h2 className="text-3xl font-bold text-foreground">
           Quel est votre budget estimé?
         </h2>
-        <p className="text-muted-foreground">
-          Cette information nous aide à vous mettre en relation avec les bons entrepreneurs
-        </p>
+        <div className="bg-accent-light border-l-4 border-primary p-4 rounded-r-lg">
+          <p className="text-sm text-foreground font-medium mb-2">
+            💡 Pourquoi c'est important?
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Un budget réaliste permet aux entrepreneurs de vous proposer des soumissions précises et adaptées. 
+            Plus votre estimation est juste, plus vous recevrez des propositions pertinentes qui correspondent 
+            réellement à vos attentes et à l'ampleur de votre projet.
+          </p>
+        </div>
       </div>
       
-      <div className="grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {budgetRanges.map((budget) => (
           <button
             key={budget.id}

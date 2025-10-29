@@ -102,7 +102,7 @@ const Quiz = ({ onClose }: QuizProps) => {
           toast.error("Veuillez sélectionner une plage de budget");
           return false;
         }
-        if (quizData.budget === "less-10k") {
+        if (quizData.budget === "less-12k") {
           setDisqualified("budget");
           return false;
         }

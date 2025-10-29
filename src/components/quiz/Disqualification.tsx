@@ -10,7 +10,7 @@ const Disqualification = ({ reason, onBack }: DisqualificationProps) => {
   const messages = {
     budget: {
       title: "Merci de votre intérêt!",
-      description: "Pour l'instant, Kompar se spécialise dans les projets de 10 000$ et plus. Nous vous recommandons de consulter des entrepreneurs locaux directement pour des projets de plus petite envergure."
+      description: "Pour l'instant, Kompar se spécialise dans les projets de 12 000$ et plus. Nous vous recommandons de consulter des entrepreneurs locaux directement pour votre projet."
     },
     timeline: {
       title: "Votre projet est encore loin!",
