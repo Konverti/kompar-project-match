@@ -1,0 +1,229 @@
+PROMPT POUR RECRÉER L'APPLICATION KOMPAR - COPIER-COLLER DANS LOVABLE
+===============================================================================
+
+Créé une landing page avec formulaire multi-étapes pour soumissions de projets de rénovation.
+
+DESIGN SYSTEM:
+- Palette: Bleu (#2563eb primary), fond clair avec dégradés subtils
+- Typographie: Inter, titres bold, texte lisible
+- Espacement: Généreux, aéré, moderne
+- Ombres: Fortes sur les cards (shadow-strong)
+- Animations: Fade-in, transitions smooth
+
+STRUCTURE DU SITE:
+
+1. PAGE D'ACCUEIL (/) avec sections:
+   - Hero: Grand titre "Comparez et trouvez le meilleur entrepreneur", sous-titre, CTA "Commencer" qui scroll vers #quiz-form
+   - Logo Kompar en haut à gauche
+   - Comment ça marche: 3 étapes (Remplissez, Comparez, Choisissez) avec icônes
+   - Avantages: 4 cards avec icônes (Gratuit, Rapide, Qualité, Support)
+   - Formulaire embarqué (QuizEmbed)
+   - FAQ: Accordéon avec 5-6 questions
+   - Footer: Copyright, liens
+
+2. PAGE QUIZ (/quiz):
+   - Affiche le formulaire Quiz en pleine page
+   - Bouton retour vers accueil
+
+FORMULAIRE MULTI-ÉTAPES (Quiz):
+
+Architecture:
+- 7 étapes + écran de disqualification
+- Barre de progression en haut
+- Boutons navigation: "Précédent" et "Suivant"/"Envoyer"
+- Validation à chaque étape avec toasts pour erreurs
+- Sauvegarde dans localStorage à chaque changement
+- Design: Card blanc avec ombre forte, padding généreux
+
+Étapes:
+
+ÉTAPE 1 - Type de projet:
+- Titre: "Quel type de projet avez-vous?"
+- 6 boutons grille 2 colonnes:
+  * Toiture (icône Home)
+  * Revêtement extérieur (icône PaintBucket)
+  * Portes et fenêtres (icône DoorOpen)
+  * Isolation (icône Wind)
+  * Peinture (icône Paintbrush)
+  * Autre (icône MoreHorizontal)
+
+ÉTAPE 2 - Localisation:
+- Titre: "Où se situe votre projet?"
+- Select dropdown avec régions du Québec:
+  * Montréal
+  * Québec
+  * Laval
+  * Gatineau
+  * Longueuil
+  * Sherbrooke
+  * Saguenay
+  * Trois-Rivières
+  * Terrebonne
+  * Saint-Jean-sur-Richelieu
+  * Autre
+
+ÉTAPE 3 - Ville:
+- Titre: "Dans quelle ville?"
+- Input texte pour nom de ville
+- Validation: minimum 2 caractères
+
+ÉTAPE 4 - Budget:
+- Titre: "Quel est votre budget estimé?"
+- Radio buttons:
+  * Moins de 5 000$
+  * 5 000$ - 15 000$
+  * 15 000$ - 30 000$
+  * 30 000$ - 50 000$
+  * Plus de 50 000$
+  * Je ne sais pas encore
+
+ÉTAPE 5 - Échéancier:
+- Titre: "Quel est votre échéancier?"
+- Radio buttons:
+  * Moins d'un mois
+  * 1-3 mois
+  * 3-6 mois
+  * 6-12 mois
+  * Plus d'un an
+  * Flexible
+
+DISQUALIFICATION (si budget < 5000$ ET échéancier flexible):
+- Icône AlertCircle rouge
+- Message: "Nous sommes désolés..."
+- Explication
+- Bouton "Recommencer le questionnaire"
+
+ÉTAPE 6 - Détails du projet:
+- Titre: "Décrivez votre projet"
+- Textarea (min 20 caractères, max 500)
+- Placeholder guide l'utilisateur
+- Compteur de caractères
+- Upload de photos (optionnel):
+  * Bouton "Ajouter des photos" avec icône Upload
+  * Input file hidden, accept images
+  * Affichage miniatures avec bouton X pour supprimer
+  * Grid responsive pour les photos
+
+ÉTAPE 7 - Informations de contact:
+- Titre: "Comment pouvons-nous vous joindre?"
+- 4 inputs:
+  * Prénom (requis)
+  * Nom (requis)
+  * Email (requis, validation email)
+  * Téléphone (requis, format (XXX) XXX-XXXX)
+- Checkbox conditions:
+  * "J'accepte les conditions d'utilisation et la politique de confidentialité"
+  * Requis pour soumettre
+
+COMPORTEMENT:
+- Validation stricte à chaque étape
+- Toast rouge pour erreurs
+- Toast vert pour succès d'envoi
+- Loading sur bouton pendant soumission
+- Après succès: Message de confirmation avec icône CheckCircle
+- Clear localStorage après soumission réussie
+
+COMPOSANTS UI (shadcn):
+- Button (variants: default, outline)
+- Input
+- Textarea
+- Select
+- RadioGroup
+- Checkbox
+- Progress
+- Card
+- Accordion (FAQ)
+- Toast (Sonner)
+
+INTÉGRATION SUPABASE:
+- Table "leads" avec colonnes:
+  * id (uuid, PK)
+  * project_type (text)
+  * location (text)
+  * city (text)
+  * budget (text)
+  * timeline (text)
+  * project_details (text)
+  * photos (jsonb, default '[]')
+  * first_name (text)
+  * last_name (text)
+  * email (text)
+  * phone (text)
+  * accepted_terms (boolean)
+  * created_at (timestamptz)
+  * updated_at (timestamptz)
+
+- RLS: INSERT public, SELECT authentifié
+
+- Edge function "reformulate-description":
+  * Utilise Lovable AI (google/gemini-2.5-flash)
+  * Reformule project_details (max 350 caractères)
+  * Retourne description améliorée
+  * verify_jwt = false
+
+ROUTING:
+- "/" → Page Index (landing + quiz embarqué)
+- "/quiz" → Page QuizPage (quiz pleine page)
+- "*" → Page NotFound (404)
+
+COULEURS EXACTES (HSL):
+- primary: 217 91% 60%
+- primary-light: plus clair pour dégradés
+- background: blanc
+- card: blanc
+- muted: gris clair
+- destructive: rouge pour erreurs
+
+ICÔNES (lucide-react):
+- Home, PaintBucket, DoorOpen, Wind, Paintbrush
+- MoreHorizontal, CheckCircle, AlertCircle, Upload
+- ChevronLeft, ChevronRight, X
+
+COMPORTEMENTS CLÉS:
+1. Smooth scroll vers #quiz-form sur CTA
+2. localStorage persiste les données pendant remplissage
+3. Validation temps réel sur les inputs
+4. Format téléphone automatique: (XXX) XXX-XXXX
+5. Disqualification conditionnelle (budget + timing)
+6. Upload photos convertit en base64 pour stockage JSON
+7. Toast notifications pour feedback utilisateur
+
+RESPONSIVE:
+- Mobile first
+- Grilles adaptatives (1 col mobile, 2+ desktop)
+- Textes plus petits sur mobile
+- Padding réduit sur petit écran
+- Formulaire pleine largeur avec max-width
+
+ANIMATIONS:
+- Fade-in sur apparition sections
+- Transitions sur hover boutons
+- Progress bar animée
+- Smooth scroll
+
+FICHIERS NÉCESSAIRES:
+- src/pages/Index.tsx (landing page)
+- src/pages/QuizPage.tsx (page quiz)
+- src/pages/NotFound.tsx (404)
+- src/components/Quiz.tsx (logique formulaire)
+- src/components/QuizEmbed.tsx (wrapper pour landing)
+- src/components/Hero.tsx
+- src/components/HowItWorks.tsx
+- src/components/Advantages.tsx
+- src/components/ChooseContractor.tsx
+- src/components/FAQ.tsx
+- src/components/Footer.tsx
+- src/components/quiz/ProgressBar.tsx
+- src/components/quiz/StepOne.tsx (jusqu'à StepSeven.tsx)
+- src/components/quiz/Disqualification.tsx
+- supabase/functions/reformulate-description/index.ts
+
+INSTRUCTIONS FINALES:
+1. Connecte d'abord ton Supabase
+2. Créé la table "leads" avec la migration SQL fournie
+3. Copie-colle ce prompt complet
+4. Demande à créer tous les composants avec le design exact
+5. Test le formulaire de bout en bout
+6. Vérifie que les données s'enregistrent dans Supabase
+
+Le résultat doit être IDENTIQUE visuellement et fonctionnellement.
