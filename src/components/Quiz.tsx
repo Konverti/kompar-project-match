@@ -266,7 +266,14 @@ const Quiz = ({ onClose }: QuizProps) => {
           {currentStep === 4 && (
             <StepFour
               value={quizData.timeline}
-              onChange={(value) => setQuizData({ ...quizData, timeline: value })}
+              onChange={(value) => {
+                setQuizData({ ...quizData, timeline: value });
+                if (value === "more-6-months") {
+                  setTimeout(() => setDisqualified("timeline"), 300);
+                } else {
+                  setTimeout(() => setCurrentStep(5), 300);
+                }
+              }}
             />
           )}
 
@@ -296,7 +303,7 @@ const Quiz = ({ onClose }: QuizProps) => {
 
           {currentStep === 7 && <StepSeven onRestart={handleRestart} />}
 
-          {currentStep < 7 && currentStep !== 1 && currentStep !== 3 && (
+          {currentStep < 7 && currentStep !== 1 && currentStep !== 3 && currentStep !== 4 && (
             <div className="flex justify-between gap-4 mt-8">
               <Button
                 onClick={handleBack}
@@ -320,7 +327,7 @@ const Quiz = ({ onClose }: QuizProps) => {
             </div>
           )}
           
-          {(currentStep === 1 || currentStep === 3) && (
+          {(currentStep === 1 || currentStep === 3 || currentStep === 4) && (
             <div className="flex justify-start gap-4 mt-8">
               <Button
                 onClick={handleBack}

@@ -16,7 +16,7 @@ const Hero = ({ onStartQuiz }: HeroProps) => {
         </div>
         
         <h2 className="text-3xl md:text-5xl font-bold text-foreground leading-tight">
-          Trouvez le bon entrepreneur pour votre projet
+          Trouvez le bon entrepreneur pour votre projet rénovation
         </h2>
         
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
