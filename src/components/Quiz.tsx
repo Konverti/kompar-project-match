@@ -85,25 +85,9 @@ const Quiz = ({ onClose }: QuizProps) => {
 
   const validateStep = () => {
     switch (currentStep) {
-      case 1:
-        if (!quizData.projectType) {
-          toast.error("Veuillez sélectionner un type de projet");
-          return false;
-        }
-        break;
       case 2:
         if (!quizData.location || !quizData.city) {
           toast.error("Veuillez remplir tous les champs de localisation");
-          return false;
-        }
-        break;
-      case 3:
-        if (!quizData.budget) {
-          toast.error("Veuillez sélectionner une plage de budget");
-          return false;
-        }
-        if (quizData.budget === "less-12k") {
-          setDisqualified("budget");
           return false;
         }
         break;
@@ -217,31 +201,42 @@ const Quiz = ({ onClose }: QuizProps) => {
 
   if (disqualified) {
     return (
-      <div className="animate-fade-in">
-        <Disqualification reason={disqualified} onBack={handleBack} />
+      <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-12">
+        <div className="max-w-4xl mx-auto">
+          <Disqualification reason={disqualified} onBack={handleBack} />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-12">
       <div className="max-w-4xl mx-auto">
         {currentStep < 7 && (
           <div className="mb-8">
-            <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
-            <div className="text-center mt-2">
+            <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-muted-foreground">
                 Étape {currentStep} sur {TOTAL_STEPS}
               </span>
+              <button
+                onClick={onClose}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Quitter
+              </button>
             </div>
+            <ProgressBar currentStep={currentStep} totalSteps={TOTAL_STEPS} />
           </div>
         )}
 
-        <div>
+        <div className="bg-card rounded-2xl shadow-strong p-6 md:p-10">
           {currentStep === 1 && (
             <StepOne
               value={quizData.projectType}
-              onChange={(value) => setQuizData({ ...quizData, projectType: value })}
+              onChange={(value) => {
+                setQuizData({ ...quizData, projectType: value });
+                setTimeout(() => setCurrentStep(2), 300);
+              }}
             />
           )}
 
@@ -257,7 +252,14 @@ const Quiz = ({ onClose }: QuizProps) => {
           {currentStep === 3 && (
             <StepThree
               value={quizData.budget}
-              onChange={(value) => setQuizData({ ...quizData, budget: value })}
+              onChange={(value) => {
+                setQuizData({ ...quizData, budget: value });
+                if (value === "less-12k") {
+                  setTimeout(() => setDisqualified("budget"), 300);
+                } else {
+                  setTimeout(() => setCurrentStep(4), 300);
+                }
+              }}
             />
           )}
 
@@ -294,7 +296,7 @@ const Quiz = ({ onClose }: QuizProps) => {
 
           {currentStep === 7 && <StepSeven onRestart={handleRestart} />}
 
-          {currentStep < 7 && (
+          {currentStep < 7 && currentStep !== 1 && currentStep !== 3 && (
             <div className="flex justify-between gap-4 mt-8">
               <Button
                 onClick={handleBack}
@@ -314,6 +316,20 @@ const Quiz = ({ onClose }: QuizProps) => {
               >
                 {currentStep === 6 ? (isSubmitting ? "Envoi..." : "Envoyer") : "Suivant"}
                 {currentStep < 6 && <ArrowRight />}
+              </Button>
+            </div>
+          )}
+          
+          {(currentStep === 1 || currentStep === 3) && (
+            <div className="flex justify-start gap-4 mt-8">
+              <Button
+                onClick={handleBack}
+                variant="outline"
+                size="lg"
+                disabled={currentStep === 1}
+              >
+                <ArrowLeft />
+                Précédent
               </Button>
             </div>
           )}

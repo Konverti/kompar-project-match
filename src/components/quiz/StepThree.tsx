@@ -40,12 +40,14 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
           <p className="text-sm text-muted-foreground">
             Un budget réaliste permet aux entrepreneurs de vous proposer des soumissions précises et adaptées. 
             Plus votre estimation est juste, plus vous recevrez des propositions pertinentes qui correspondent 
-            réellement à vos attentes et à l'ampleur de votre projet.
+            réellement à vos attentes et à l'ampleur de votre projet. <strong>Important:</strong> Choisir un budget 
+            plus élevé ne signifie pas que les entrepreneurs vont charger plus cher - ils ajusteront leur soumission 
+            selon la réalité de votre projet.
           </p>
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="hidden md:grid grid-cols-2 gap-3">
         {budgetRanges.map((budget) => (
           <button
             key={budget.id}
@@ -59,6 +61,21 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
             <span className="font-semibold">{budget.label}</span>
           </button>
         ))}
+      </div>
+      
+      <div className="md:hidden">
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full p-4 rounded-lg border-2 border-border bg-card text-foreground font-semibold focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+        >
+          <option value="">Sélectionnez votre budget</option>
+          {budgetRanges.map((budget) => (
+            <option key={budget.id} value={budget.id}>
+              {budget.label}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
