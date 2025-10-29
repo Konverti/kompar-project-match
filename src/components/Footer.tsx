@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer className="bg-card border-t border-border py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-lg font-bold text-primary mb-4">Kompar</h3>
             <p className="text-sm text-muted-foreground">
@@ -35,6 +35,22 @@ const Footer = () => {
                 >
                   FAQ
                 </button>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold mb-4">Entrepreneurs</h4>
+            <ul className="space-y-2">
+              <li>
+                <a 
+                  href="https://app.konverti.ca" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Devenir un entrepreneur partenaire
+                </a>
               </li>
             </ul>
           </div>

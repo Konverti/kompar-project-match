@@ -38,11 +38,7 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
             💡 Pourquoi c'est important?
           </p>
           <p className="text-sm text-muted-foreground">
-            Un budget réaliste permet aux entrepreneurs de vous proposer des soumissions précises et adaptées. 
-            Plus votre estimation est juste, plus vous recevrez des propositions pertinentes qui correspondent 
-            réellement à vos attentes et à l'ampleur de votre projet. <strong>Important:</strong> Choisir un budget 
-            plus élevé ne signifie pas que les entrepreneurs vont charger plus cher - ils ajusteront leur soumission 
-            selon la réalité de votre projet.
+            Un budget réaliste assure des soumissions précises. <strong>Important:</strong> Choisir un budget plus élevé ne fait pas augmenter les prix - les entrepreneurs ajustent selon votre projet réel.
           </p>
         </div>
       </div>
