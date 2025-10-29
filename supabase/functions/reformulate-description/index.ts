@@ -39,11 +39,11 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: "Tu es un assistant qui aide à reformuler des descriptions de projets de rénovation pour les rendre plus claires, professionnelles et détaillées. Garde toutes les informations importantes mais améliore la structure et la clarté. Réponds uniquement avec la description reformulée, sans introduction ni conclusion."
+            content: "Tu es un assistant qui aide à reformuler des descriptions de projets de rénovation. RÈGLES STRICTES: 1) N'invente AUCUNE information, utilise UNIQUEMENT ce qui est mentionné dans le texte original. 2) Améliore seulement la clarté, la structure et le professionnalisme. 3) Maximum 350 caractères. 4) Réponds uniquement avec la description reformulée, sans introduction ni conclusion."
           },
           {
             role: "user",
-            content: `Reformule cette description de projet de rénovation de manière plus professionnelle et détaillée:\n\n${description}`
+            content: `Reformule cette description en restant fidèle aux informations données (maximum 350 caractères):\n\n${description}`
           }
         ],
       }),
