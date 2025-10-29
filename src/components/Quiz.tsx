@@ -210,17 +210,17 @@ const Quiz = ({ onClose }: QuizProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-6 md:py-12">
       <div className="max-w-4xl mx-auto">
         {currentStep < 7 && (
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-muted-foreground">
+          <div className="mb-4 md:mb-8">
+            <div className="flex items-center justify-between mb-2 md:mb-4">
+              <span className="text-xs md:text-sm font-medium text-muted-foreground">
                 Étape {currentStep} sur {TOTAL_STEPS}
               </span>
               <button
                 onClick={onClose}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Quitter
               </button>
@@ -229,7 +229,7 @@ const Quiz = ({ onClose }: QuizProps) => {
           </div>
         )}
 
-        <div className="bg-card rounded-2xl shadow-strong p-6 md:p-10">
+        <div className="bg-card rounded-2xl shadow-strong p-3 md:p-6 lg:p-10">
           {currentStep === 1 && (
             <StepOne
               value={quizData.projectType}
@@ -304,14 +304,15 @@ const Quiz = ({ onClose }: QuizProps) => {
           {currentStep === 7 && <StepSeven onRestart={handleRestart} />}
 
           {currentStep < 7 && currentStep !== 1 && currentStep !== 3 && currentStep !== 4 && (
-            <div className="flex justify-between gap-4 mt-8">
+            <div className="flex justify-between gap-2 md:gap-4 mt-4 md:mt-8">
               <Button
                 onClick={handleBack}
                 variant="outline"
                 size="lg"
                 disabled={currentStep === 1}
+                className="text-sm md:text-base h-10 md:h-auto"
               >
-                <ArrowLeft />
+                <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
                 Précédent
               </Button>
 
@@ -320,22 +321,24 @@ const Quiz = ({ onClose }: QuizProps) => {
                 variant="default"
                 size="lg"
                 disabled={isSubmitting}
+                className="text-sm md:text-base h-10 md:h-auto"
               >
                 {currentStep === 6 ? (isSubmitting ? "Envoi..." : "Envoyer") : "Suivant"}
-                {currentStep < 6 && <ArrowRight />}
+                {currentStep < 6 && <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />}
               </Button>
             </div>
           )}
           
           {(currentStep === 1 || currentStep === 3 || currentStep === 4) && (
-            <div className="flex justify-start gap-4 mt-8">
+            <div className="flex justify-start gap-2 md:gap-4 mt-4 md:mt-8">
               <Button
                 onClick={handleBack}
                 variant="outline"
                 size="lg"
                 disabled={currentStep === 1}
+                className="text-sm md:text-base h-10 md:h-auto"
               >
-                <ArrowLeft />
+                <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
                 Précédent
               </Button>
             </div>

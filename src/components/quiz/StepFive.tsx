@@ -35,24 +35,24 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
   };
   
   return (
-    <div className="space-y-8 animate-fade-in max-w-2xl mx-auto">
-      <div className="text-center space-y-4">
+    <div className="space-y-4 md:space-y-8 animate-fade-in max-w-2xl mx-auto">
+      <div className="text-center space-y-2 md:space-y-4">
         <div className="flex justify-center">
-          <div className="bg-accent-light p-4 rounded-full">
-            <FileText className="w-8 h-8 text-accent" />
+          <div className="bg-accent-light p-2 md:p-4 rounded-full">
+            <FileText className="w-5 h-5 md:w-8 md:h-8 text-accent" />
           </div>
         </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">
           Parlez-nous de votre projet
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-xs md:text-base text-muted-foreground">
           Plus vous donnez de détails, plus les soumissions seront précises
         </p>
       </div>
       
-      <div className="space-y-6">
+      <div className="space-y-3 md:space-y-6">
         <div className="space-y-2">
-          <Label htmlFor="details" className="text-base">
+          <Label htmlFor="details" className="text-sm md:text-base">
             Description du projet *
           </Label>
           <Textarea
@@ -60,32 +60,32 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
             placeholder="Décrivez votre projet en détail: dimensions, matériaux souhaités, style recherché, contraintes particulières, etc."
             value={details}
             onChange={(e) => onDetailsChange(e.target.value)}
-            className="min-h-[200px]"
+            className="min-h-[120px] md:min-h-[200px] text-sm md:text-base"
           />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs md:text-sm text-muted-foreground">
             {details.length} caractères (minimum 200 recommandé)
           </p>
         </div>
         
         <div className="space-y-2">
-          <Label className="text-base">
+          <Label className="text-sm md:text-base">
             Photos (optionnel, jusqu'à 5)
           </Label>
           
           {photos.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-3 mb-3 md:mb-4">
               {photos.map((photo, index) => (
                 <div key={index} className="relative group">
                   <img 
                     src={photo} 
                     alt={`Photo ${index + 1}`} 
-                    className="w-full h-24 object-cover rounded-lg"
+                    className="w-full h-16 md:h-24 object-cover rounded-lg"
                   />
                   <button
                     onClick={() => removePhoto(index)}
-                    className="absolute top-1 right-1 bg-destructive text-destructive-foreground p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-0.5 right-0.5 md:top-1 md:right-1 bg-destructive text-destructive-foreground p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-3 h-3 md:w-4 md:h-4" />
                   </button>
                 </div>
               ))}
@@ -93,7 +93,7 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
           )}
           
           {photos.length < 5 && (
-            <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary transition-colors">
+            <div className="border-2 border-dashed border-border rounded-lg p-4 md:p-8 text-center hover:border-primary transition-colors">
               <Input
                 type="file"
                 accept="image/*"
@@ -105,10 +105,10 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
               />
               <label 
                 htmlFor="photo-upload" 
-                className="cursor-pointer flex flex-col items-center gap-2"
+                className="cursor-pointer flex flex-col items-center gap-1 md:gap-2"
               >
-                <Upload className="w-8 h-8 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground">
+                <Upload className="w-5 h-5 md:w-8 md:h-8 text-muted-foreground" />
+                <p className="text-xs md:text-sm text-muted-foreground">
                   Cliquez pour ajouter des photos ({5 - photos.length} restantes)
                 </p>
               </label>
