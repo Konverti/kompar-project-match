@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import komparLogo from "@/assets/kompar-logo.png";
 
 interface HeroProps {
   onStartQuiz: () => void;
@@ -10,9 +11,11 @@ const Hero = ({ onStartQuiz }: HeroProps) => {
     <section className="relative min-h-[90vh] flex items-center justify-center bg-gradient-to-b from-background to-primary-light px-4 py-20">
       <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
         <div className="inline-block mb-4">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Kompar
-          </h1>
+          <img 
+            src={komparLogo} 
+            alt="Kompar" 
+            className="h-16 md:h-20 w-auto mx-auto"
+          />
         </div>
         
         <h2 className="text-3xl md:text-5xl font-bold text-foreground leading-tight">

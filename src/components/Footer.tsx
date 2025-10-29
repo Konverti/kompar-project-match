@@ -1,3 +1,5 @@
+import komparLogo from "@/assets/kompar-logo.png";
+
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -11,7 +13,11 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-lg font-bold text-primary mb-4">Kompar</h3>
+            <img 
+              src={komparLogo} 
+              alt="Kompar" 
+              className="h-8 w-auto mb-4"
+            />
             <p className="text-sm text-muted-foreground">
               Votre partenaire de confiance pour vos projets de rénovation
             </p>
