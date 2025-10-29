@@ -32,10 +32,10 @@ const Hero = ({ onStartQuiz }: HeroProps) => {
             onClick={onStartQuiz}
             variant="hero"
             size="lg"
-            className="text-lg md:text-xl px-10 md:px-12 py-6 md:py-8 h-auto font-bold"
+            className="text-base md:text-lg px-8 md:px-10 py-5 md:py-6 h-auto font-bold"
           >
             OBTENIR MES SOUMISSIONS
-            <ArrowRight className="ml-3 w-6 h-6" />
+            <ArrowRight className="ml-3 w-5 h-5" />
           </Button>
         </div>
         

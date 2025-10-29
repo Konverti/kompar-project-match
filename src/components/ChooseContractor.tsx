@@ -40,20 +40,20 @@ const ChooseContractor = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {tips.map((tip, index) => (
             <div 
               key={index}
-              className="bg-background p-3 md:p-6 rounded-xl shadow-soft hover:shadow-strong transition-all duration-300 animate-fade-in"
+              className="bg-background p-4 md:p-6 rounded-xl shadow-soft hover:shadow-strong transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <div className="flex items-start gap-2 md:gap-3">
-                <CheckCircle2 className="w-4 h-4 md:w-6 md:h-6 text-primary flex-shrink-0 mt-0.5 md:mt-1" />
+              <div className="flex items-start gap-3 md:gap-4">
+                <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 text-primary flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-sm md:text-lg font-bold mb-1 md:mb-2 text-foreground leading-tight">
+                  <h3 className="text-base md:text-lg font-bold mb-2 text-foreground">
                     {tip.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-tight">
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                     {tip.description}
                   </p>
                 </div>
