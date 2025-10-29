@@ -1,9 +1,11 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { FileText, Upload, X } from "lucide-react";
+import { FileText, Upload, X, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface StepFiveProps {
   details: string;
@@ -14,6 +16,7 @@ interface StepFiveProps {
 
 const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFiveProps) => {
   const [uploading, setUploading] = useState(false);
+  const [isReformulating, setIsReformulating] = useState(false);
   
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -32,6 +35,34 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
   const removePhoto = (index: number) => {
     const newPhotos = photos.filter((_, i) => i !== index);
     onPhotosChange(newPhotos);
+  };
+
+  const handleReformulate = async () => {
+    if (!details || details.length < 10) {
+      toast.error("Veuillez d'abord écrire une description");
+      return;
+    }
+
+    setIsReformulating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("reformulate-description", {
+        body: { description: details }
+      });
+
+      if (error) throw error;
+
+      if (data?.reformulatedText) {
+        onDetailsChange(data.reformulatedText);
+        toast.success("Description reformulée avec succès!");
+      } else {
+        throw new Error("Aucune réponse de l'IA");
+      }
+    } catch (error) {
+      console.error("Error reformulating:", error);
+      toast.error("Erreur lors de la reformulation");
+    } finally {
+      setIsReformulating(false);
+    }
   };
   
   return (
@@ -52,9 +83,22 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
       
       <div className="space-y-3 md:space-y-6">
         <div className="space-y-2">
-          <Label htmlFor="details" className="text-sm md:text-base">
-            Description du projet *
-          </Label>
+          <div className="flex items-center justify-between">
+            <Label htmlFor="details" className="text-sm md:text-base">
+              Description du projet *
+            </Label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handleReformulate}
+              disabled={isReformulating || !details || details.length < 10}
+              className="text-xs md:text-sm"
+            >
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1" />
+              {isReformulating ? "Reformulation..." : "Reformuler avec IA"}
+            </Button>
+          </div>
           <Textarea
             id="details"
             placeholder="Décrivez votre projet en détail: dimensions, matériaux souhaités, style recherché, contraintes particulières, etc."
