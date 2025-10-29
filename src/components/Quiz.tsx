@@ -210,8 +210,8 @@ const Quiz = ({ onClose }: QuizProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-6 md:py-12">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-8 md:py-12 flex items-center">
+      <div className="max-w-4xl mx-auto w-full">
         {currentStep < 7 && (
           <div className="mb-4 md:mb-8">
             <div className="flex items-center justify-between mb-2 md:mb-4">

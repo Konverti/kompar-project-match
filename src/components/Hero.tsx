@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import komparLogo from "@/assets/kompar-logo.png";
 
-interface HeroProps {
-  onStartQuiz: () => void;
-}
-
-const Hero = ({ onStartQuiz }: HeroProps) => {
+const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center bg-gradient-to-b from-background to-primary-light px-4 py-16 md:py-20">
       <div className="max-w-5xl mx-auto text-center space-y-6 md:space-y-10 animate-fade-in">
@@ -29,7 +27,7 @@ const Hero = ({ onStartQuiz }: HeroProps) => {
         
         <div className="pt-6 md:pt-8">
           <Button 
-            onClick={onStartQuiz}
+            onClick={() => navigate("/quiz")}
             variant="hero"
             size="lg"
             className="text-base md:text-lg px-8 md:px-10 py-5 md:py-6 h-auto font-bold"
