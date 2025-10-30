@@ -11,9 +11,9 @@ interface StepTwoProps {
 
 const StepTwo = ({ location, city, onLocationChange, onCityChange }: StepTwoProps) => {
   const locations = [
-    { id: "rive-nord", label: "Rive-Nord de Montréal" },
-    { id: "rive-sud", label: "Rive-Sud de Montréal" },
-    { id: "montreal", label: "Montréal" }
+    { id: "Rive-Nord de Montréal", label: "Rive-Nord de Montréal" },
+    { id: "Rive-Sud de Montréal", label: "Rive-Sud de Montréal" },
+    { id: "Montréal", label: "Montréal" }
   ];
   
   return (

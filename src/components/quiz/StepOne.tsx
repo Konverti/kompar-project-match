@@ -8,10 +8,10 @@ interface StepOneProps {
 
 const StepOne = ({ value, onChange }: StepOneProps) => {
   const projectTypes = [
-    { id: "cuisine", label: "Cuisine", icon: ChefHat },
-    { id: "salle-de-bain", label: "Salle de bain", icon: Bath },
-    { id: "sous-sol", label: "Sous-sol", icon: Home },
-    { id: "apres-sinistre", label: "Après sinistre", icon: Flame }
+    { id: "Cuisine", label: "Cuisine", icon: ChefHat },
+    { id: "Salle de bain", label: "Salle de bain", icon: Bath },
+    { id: "Sous-sol", label: "Sous-sol", icon: Home },
+    { id: "Après sinistre", label: "Après sinistre", icon: Flame }
   ];
   
   return (
