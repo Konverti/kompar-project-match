@@ -135,22 +135,52 @@ const Quiz = ({ onClose }: QuizProps) => {
     }
   };
 
+  const convertBudgetToCents = (budget: string): number => {
+    const budgetMap: { [key: string]: number } = {
+      "less-12k": 1200000,
+      "12k-20k": 1600000,
+      "20k-40k": 3000000,
+      "40k-60k": 5000000,
+      "60k-100k": 8000000,
+      "more-100k": 10000000
+    };
+    return budgetMap[budget] || 0;
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("leads").insert({
-        project_type: quizData.projectType,
+      const payload = {
+        projectType: quizData.projectType,
         location: quizData.location,
         city: quizData.city,
         budget: quizData.budget,
         timeline: quizData.timeline,
-        project_details: quizData.projectDetails,
+        projectDetails: quizData.projectDetails,
         photos: quizData.photos,
+        firstName: quizData.firstName,
+        lastName: quizData.lastName,
+        email: quizData.email,
+        phone: quizData.phone,
+        acceptedTerms: quizData.acceptedTerms
+      };
+
+      const { error } = await (supabase as any).from("leads_test").insert({
+        sector_id: null,
         first_name: quizData.firstName,
         last_name: quizData.lastName,
         email: quizData.email,
         phone: quizData.phone,
-        accepted_terms: quizData.acceptedTerms
+        city: quizData.city,
+        region: quizData.location,
+        service: quizData.projectType,
+        budget_cent: convertBudgetToCents(quizData.budget),
+        project_details: quizData.projectDetails,
+        time_sold: null,
+        max_sales: 4,
+        available_until: null,
+        payload: payload,
+        demo_buyer_email: null
       });
 
       if (error) throw error;
