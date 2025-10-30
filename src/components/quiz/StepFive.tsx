@@ -48,6 +48,7 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
           continue;
         }
         
+        // Store the path in the format expected by the database
         uploadedPaths.push(`/lead-photos/${fileName}`);
       }
       
@@ -61,6 +62,22 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
     } finally {
       setUploading(false);
     }
+  };
+  
+  // Helper to get display URL for photos
+  const getPhotoDisplayUrl = (photoPath: string): string => {
+    // If it's already a full URL, return as is
+    if (photoPath.startsWith('http')) return photoPath;
+    
+    // Extract filename from path like "/lead-photos/photo123.jpg"
+    const fileName = photoPath.replace('/lead-photos/', '');
+    
+    // Get public URL from Supabase
+    const { data } = externalSupabase.storage
+      .from('leads-photos')
+      .getPublicUrl(fileName);
+    
+    return data.publicUrl;
   };
   
   const removePhoto = (index: number) => {
@@ -152,7 +169,7 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
               {photos.map((photo, index) => (
                 <div key={index} className="relative group">
                   <img 
-                    src={photo} 
+                    src={getPhotoDisplayUrl(photo)} 
                     alt={`Photo ${index + 1}`} 
                     className="w-full h-16 md:h-24 object-cover rounded-lg"
                   />
