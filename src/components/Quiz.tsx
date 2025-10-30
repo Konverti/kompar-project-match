@@ -189,6 +189,11 @@ const Quiz = ({ onClose }: QuizProps) => {
 
       if (error) throw error;
 
+      // Track Meta Pixel custom event
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Prospect');
+      }
+
       localStorage.removeItem(STORAGE_KEY);
       setCurrentStep(7);
       toast.success("Votre demande a été envoyée avec succès!");
