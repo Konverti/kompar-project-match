@@ -68,7 +68,12 @@ const Footer = () => {
             <p className="text-xs mt-1">Kompar est une marque exploitée par Agence Ludik</p>
           </div>
           <div>
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <a 
+              href="https://docs.google.com/document/d/1SN2E2l1B5XVQE6AIe9CxLrlUHHmpWIuJhE5OuFZTKMs/edit?usp=sharing" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
               Termes et conditions
             </a>
           </div>

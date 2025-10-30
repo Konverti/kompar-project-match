@@ -133,7 +133,12 @@ const StepSix = ({
             >
               J'accepte de recevoir jusqu'à 3 soumissions d'entrepreneurs qualifiés et 
               j'accepte les{" "}
-              <a href="#" className="text-primary hover:underline font-medium">
+              <a 
+                href="https://docs.google.com/document/d/1SN2E2l1B5XVQE6AIe9CxLrlUHHmpWIuJhE5OuFZTKMs/edit?usp=sharing" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
                 termes et conditions
               </a>
             </label>
