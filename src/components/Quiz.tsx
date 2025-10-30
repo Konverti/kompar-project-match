@@ -173,22 +173,18 @@ const Quiz = ({ onClose }: QuizProps) => {
       };
 
       const { error } = await externalSupabase.from("leads").insert({
-        sector_id: 'a44f1046-65c4-4038-b11d-e9d426e783e5',
         first_name: quizData.firstName,
         last_name: quizData.lastName,
         email: quizData.email,
         phone: quizData.phone,
         city: quizData.city,
-        region: quizData.location,
-        service: quizData.projectType,
-        budget_cents: convertBudgetToCents(quizData.budget),
+        location: quizData.location,
+        project_type: quizData.projectType,
+        budget: quizData.budget,
         project_details: quizData.projectDetails,
         photos: quizData.photos,
-        start_timeline: quizData.timeline,
-        times_sold: 0,
-        max_sales: 4,
-        pool_status: 'available',
-        payload: payload
+        timeline: quizData.timeline,
+        accepted_terms: quizData.acceptedTerms
       });
 
       if (error) throw error;
