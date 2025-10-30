@@ -178,11 +178,10 @@ const Quiz = ({ onClose }: QuizProps) => {
         project_details: quizData.projectDetails,
         photos: quizData.photos,
         start_timeline: quizData.timeline,
-        time_sold: null,
+        times_sold: 0,
         max_sales: 4,
-        available_until: null,
-        payload: payload,
-        demo_buyer_email: null
+        pool_status: 'available',
+        payload: payload
       });
 
       if (error) throw error;

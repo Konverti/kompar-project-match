@@ -28,6 +28,22 @@ const StepSix = ({
   onPhoneChange,
   onAcceptedTermsChange
 }: StepSixProps) => {
+  const formatPhoneNumber = (value: string) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length <= 3) {
+      return numbers;
+    }
+    if (numbers.length <= 6) {
+      return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+    }
+    return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    onPhoneChange(formatted);
+  };
+
   return (
     <div className="space-y-4 md:space-y-8 animate-fade-in max-w-2xl mx-auto">
       <div className="text-center space-y-2 md:space-y-4">
@@ -98,7 +114,8 @@ const StepSix = ({
             type="tel"
             placeholder="(514) 555-0123"
             value={phone}
-            onChange={(e) => onPhoneChange(e.target.value)}
+            onChange={handlePhoneChange}
+            maxLength={14}
             className="h-10 md:h-12 text-sm md:text-base"
           />
         </div>
