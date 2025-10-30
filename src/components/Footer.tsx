@@ -74,9 +74,10 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © 2025 Kompar. Tous droits réservés.
-          </p>
+          <div className="text-sm text-muted-foreground text-center md:text-left">
+            <p>© 2025 Kompar. Tous droits réservés.</p>
+            <p className="text-xs mt-1">Kompar est une marque exploitée par Agence Ludik</p>
+          </div>
           <div className="flex gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Termes et conditions
