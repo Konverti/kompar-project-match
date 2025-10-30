@@ -166,7 +166,7 @@ const Quiz = ({ onClose }: QuizProps) => {
       };
 
       const { error } = await (supabase as any).from("leads_test").insert({
-        sector_id: null,
+        sector_id: 'a44f1046-65c4-4038-b11d-e9d426e783e5',
         first_name: quizData.firstName,
         last_name: quizData.lastName,
         email: quizData.email,
@@ -176,6 +176,8 @@ const Quiz = ({ onClose }: QuizProps) => {
         service: quizData.projectType,
         budget_cent: convertBudgetToCents(quizData.budget),
         project_details: quizData.projectDetails,
+        photos: quizData.photos,
+        start_timeline: quizData.timeline,
         time_sold: null,
         max_sales: 4,
         available_until: null,
