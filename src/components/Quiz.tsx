@@ -40,6 +40,13 @@ const Quiz = ({ onClose }: QuizProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [disqualified, setDisqualified] = useState<"budget" | "timeline" | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Track Meta Pixel event when reaching step 2
+  useEffect(() => {
+    if (currentStep === 2 && typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('trackCustom', 'Form');
+    }
+  }, [currentStep]);
   
   const [quizData, setQuizData] = useState<QuizData>(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
