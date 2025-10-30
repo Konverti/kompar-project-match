@@ -43,8 +43,18 @@ const Quiz = ({ onClose }: QuizProps) => {
 
   // Track Meta Pixel event when reaching step 2
   useEffect(() => {
-    if (currentStep === 2 && typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('trackCustom', 'Form');
+    if (currentStep === 2) {
+      // Add a small delay to ensure pixel is loaded
+      const timer = setTimeout(() => {
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          console.log('Tracking Form event');
+          (window as any).fbq('trackCustom', 'Form');
+        } else {
+          console.warn('Meta Pixel not loaded');
+        }
+      }, 100);
+      
+      return () => clearTimeout(timer);
     }
   }, [currentStep]);
   
@@ -198,7 +208,10 @@ const Quiz = ({ onClose }: QuizProps) => {
 
       // Track Meta Pixel custom event
       if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'Prospect');
+        console.log('Tracking Prospect event');
+        (window as any).fbq('trackCustom', 'Prospect');
+      } else {
+        console.warn('Meta Pixel not loaded for Prospect event');
       }
 
       localStorage.removeItem(STORAGE_KEY);
