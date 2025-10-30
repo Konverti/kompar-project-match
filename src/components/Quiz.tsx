@@ -174,7 +174,7 @@ const Quiz = ({ onClose }: QuizProps) => {
         city: quizData.city,
         region: quizData.location,
         service: quizData.projectType,
-        budget_cent: convertBudgetToCents(quizData.budget),
+        budget_cents: convertBudgetToCents(quizData.budget),
         project_details: quizData.projectDetails,
         photos: quizData.photos,
         start_timeline: quizData.timeline,
