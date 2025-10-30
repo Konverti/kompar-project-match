@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { externalSupabase } from "@/lib/externalSupabase";
 
 import ProgressBar from "./quiz/ProgressBar";
 import StepOne from "./quiz/StepOne";
@@ -165,7 +165,7 @@ const Quiz = ({ onClose }: QuizProps) => {
         acceptedTerms: quizData.acceptedTerms
       };
 
-      const { error } = await (supabase as any).from("leads_test").insert({
+      const { error } = await externalSupabase.from("leads_test").insert({
         sector_id: 'a44f1046-65c4-4038-b11d-e9d426e783e5',
         first_name: quizData.firstName,
         last_name: quizData.lastName,
