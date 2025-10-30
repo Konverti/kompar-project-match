@@ -172,7 +172,7 @@ const Quiz = ({ onClose }: QuizProps) => {
         acceptedTerms: quizData.acceptedTerms
       };
 
-      const { error } = await externalSupabase.from("leads_test").insert({
+      const { error } = await externalSupabase.from("leads").insert({
         sector_id: 'a44f1046-65c4-4038-b11d-e9d426e783e5',
         first_name: quizData.firstName,
         last_name: quizData.lastName,
