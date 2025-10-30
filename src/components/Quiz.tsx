@@ -138,11 +138,18 @@ const Quiz = ({ onClose }: QuizProps) => {
   const convertBudgetToCents = (budget: string): number => {
     const budgetMap: { [key: string]: number } = {
       "less-12k": 1200000,
-      "12k-20k": 1600000,
-      "20k-40k": 3000000,
-      "40k-60k": 5000000,
-      "60k-100k": 8000000,
-      "more-100k": 10000000
+      "12k-14k": 1400000,
+      "14k-16k": 1600000,
+      "16k-18k": 1800000,
+      "18k-20k": 2000000,
+      "20k-22k": 2200000,
+      "22k-24k": 2400000,
+      "24k-26k": 2600000,
+      "26k-28k": 2800000,
+      "28k-30k": 3000000,
+      "30k-35k": 3500000,
+      "35k-40k": 4000000,
+      "more-40k": 4000000
     };
     return budgetMap[budget] || 0;
   };

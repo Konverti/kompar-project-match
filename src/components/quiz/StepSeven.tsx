@@ -37,7 +37,7 @@ const StepSeven = ({ onRestart }: StepSevenProps) => {
             <div className="bg-primary-light p-1 rounded-full mt-1">
               <div className="w-2 h-2 bg-primary rounded-full" />
             </div>
-            <span>Vous recevrez jusqu'à 3 soumissions détaillées par email</span>
+            <span>Vous serez contacté par les entrepreneurs qui sont intéressé à votre projet</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="bg-primary-light p-1 rounded-full mt-1">
