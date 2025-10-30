@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="bg-card border-t border-border py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <img 
               src={komparLogo} 
@@ -60,17 +60,6 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
-          <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="mailto:info@kompar.ca" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  info@kompar.ca
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
         
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -78,12 +67,9 @@ const Footer = () => {
             <p>© 2025 Kompar. Tous droits réservés.</p>
             <p className="text-xs mt-1">Kompar est une marque exploitée par Agence Ludik</p>
           </div>
-          <div className="flex gap-6">
+          <div>
             <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Termes et conditions
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Politique de confidentialité
             </a>
           </div>
         </div>
