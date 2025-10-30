@@ -5,6 +5,7 @@ import { FileText, Upload, X, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { externalSupabase } from "@/lib/externalSupabase";
 import { toast } from "sonner";
 
 interface StepFiveProps {
@@ -18,18 +19,48 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
   const [uploading, setUploading] = useState(false);
   const [isReformulating, setIsReformulating] = useState(false);
   
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
     
     setUploading(true);
-    // In a real app, you would upload to Supabase Storage here
-    // For now, we'll just create local URLs
-    const newPhotos = Array.from(files).slice(0, 5 - photos.length).map(file => 
-      URL.createObjectURL(file)
-    );
-    onPhotosChange([...photos, ...newPhotos]);
-    setUploading(false);
+    
+    try {
+      const filesToUpload = Array.from(files).slice(0, 5 - photos.length);
+      const uploadedPaths: string[] = [];
+      
+      for (let i = 0; i < filesToUpload.length; i++) {
+        const file = filesToUpload[i];
+        const timestamp = Date.now();
+        const fileName = `photo${timestamp}_${i}.${file.name.split('.').pop()}`;
+        const filePath = `${fileName}`;
+        
+        const { error } = await externalSupabase.storage
+          .from('leads-photos')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false
+          });
+        
+        if (error) {
+          console.error('Upload error:', error);
+          toast.error(`Erreur lors de l'upload de ${file.name}`);
+          continue;
+        }
+        
+        uploadedPaths.push(`/lead-photos/${fileName}`);
+      }
+      
+      if (uploadedPaths.length > 0) {
+        onPhotosChange([...photos, ...uploadedPaths]);
+        toast.success(`${uploadedPaths.length} photo(s) téléchargée(s)`);
+      }
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      toast.error("Erreur lors du téléchargement des photos");
+    } finally {
+      setUploading(false);
+    }
   };
   
   const removePhoto = (index: number) => {
