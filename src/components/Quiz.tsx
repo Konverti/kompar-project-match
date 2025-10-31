@@ -269,7 +269,7 @@ const Quiz = ({ onClose }: QuizProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-primary-light px-4 py-8 md:py-12 flex items-center">
+    <div className="bg-gradient-to-b from-background to-primary-light px-4 py-4 md:py-6">
       <div className="max-w-4xl mx-auto w-full">
         {currentStep < 7 && (
           <div className="mb-4 md:mb-8">
