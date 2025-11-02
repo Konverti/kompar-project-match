@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-import { externalSupabase } from "@/lib/externalSupabase";
+import { supabase } from "@/integrations/supabase/client";
 
 import ProgressBar from "./quiz/ProgressBar";
 import StepOne from "./quiz/StepOne";
@@ -189,7 +189,7 @@ const Quiz = ({ onClose }: QuizProps) => {
         acceptedTerms: quizData.acceptedTerms
       };
 
-      const { error } = await externalSupabase.from("leads").insert({
+      const { error } = await supabase.from("leads").insert({
         first_name: quizData.firstName,
         last_name: quizData.lastName,
         email: quizData.email,
