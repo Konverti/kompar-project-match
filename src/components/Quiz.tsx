@@ -238,7 +238,8 @@ const Quiz = ({ onClose }: QuizProps) => {
         project_details: quizData.projectDetails,
         photos: quizData.photos,
         timeline: quizData.timeline,
-        accepted_terms: quizData.acceptedTerms
+        accepted_terms: quizData.acceptedTerms,
+        pool_status: "pending_approval"
       });
 
       if (error) throw error;
