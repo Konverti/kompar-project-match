@@ -12,7 +12,7 @@ const Testimonials = () => {
     {
       name: "François Lemieux",
       location: "Montréal",
-      rating: 4,
+      rating: 5,
       text: "Bon service pour comparer les prix. J'ai pu choisir l'entrepreneur qui correspondait le mieux à mon budget.",
       project: "Salle de bain"
     },
