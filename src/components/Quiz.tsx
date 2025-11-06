@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { externalSupabase } from "@/lib/externalSupabase";
+import { supabase } from "@/integrations/supabase/client";
 
 import ProgressBar from "./quiz/ProgressBar";
 import StepOne from "./quiz/StepOne";
@@ -40,6 +41,7 @@ const Quiz = ({ onClose }: QuizProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [disqualified, setDisqualified] = useState<"budget" | "timeline" | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
   // Track Meta Pixel event when reaching step 2
   useEffect(() => {
@@ -57,6 +59,35 @@ const Quiz = ({ onClose }: QuizProps) => {
       return () => clearTimeout(timer);
     }
   }, [currentStep]);
+
+  // Track analytics for each step
+  useEffect(() => {
+    const trackStep = async () => {
+      const stepNames = [
+        "Étape 1: Type de projet",
+        "Étape 2: Localisation",
+        "Étape 3: Budget",
+        "Étape 4: Timeline",
+        "Étape 5: Détails",
+        "Étape 6: Coordonnées",
+        "Confirmation"
+      ];
+      
+      if (currentStep <= 7) {
+        try {
+          await supabase.from("quiz_analytics").insert({
+            session_id: sessionId,
+            step_number: currentStep,
+            step_name: stepNames[currentStep - 1] || "Étape inconnue",
+          });
+        } catch (error) {
+          console.error("Error tracking step:", error);
+        }
+      }
+    };
+    
+    trackStep();
+  }, [currentStep, sessionId]);
   
   const [quizData, setQuizData] = useState<QuizData>(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -115,6 +146,12 @@ const Quiz = ({ onClose }: QuizProps) => {
         }
         if (quizData.timeline === "more-6-months") {
           setDisqualified("timeline");
+          // Track disqualification
+          supabase.from("quiz_analytics").insert({
+            session_id: sessionId,
+            step_number: 0,
+            step_name: "Disqualifié: Timeline",
+          });
           return false;
         }
         break;
@@ -314,6 +351,12 @@ const Quiz = ({ onClose }: QuizProps) => {
               onChange={(value) => {
                 setQuizData({ ...quizData, budget: value });
                 if (value === "less-12k") {
+                  // Track disqualification
+                  supabase.from("quiz_analytics").insert({
+                    session_id: sessionId,
+                    step_number: 0,
+                    step_name: "Disqualifié: Budget",
+                  });
                   setTimeout(() => setDisqualified("budget"), 300);
                 } else {
                   setTimeout(() => setCurrentStep(4), 300);

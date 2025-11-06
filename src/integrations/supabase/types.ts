@@ -68,6 +68,33 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_analytics: {
+        Row: {
+          created_at: string
+          id: string
+          session_id: string
+          step_name: string
+          step_number: number
+          timestamp: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          session_id: string
+          step_name: string
+          step_number: number
+          timestamp?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          session_id?: string
+          step_name?: string
+          step_number?: number
+          timestamp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
