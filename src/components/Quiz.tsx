@@ -9,7 +9,6 @@ import ProgressBar from "./quiz/ProgressBar";
 import StepOne from "./quiz/StepOne";
 import StepTwo from "./quiz/StepTwo";
 import StepThree from "./quiz/StepThree";
-import StepFour from "./quiz/StepFour";
 import StepFive from "./quiz/StepFive";
 import StepSix from "./quiz/StepSix";
 import StepSeven from "./quiz/StepSeven";
@@ -20,7 +19,6 @@ interface QuizData {
   location: string;
   city: string;
   budget: string;
-  timeline: string;
   projectDetails: string;
   photos: string[];
   firstName: string;
@@ -30,7 +28,7 @@ interface QuizData {
   acceptedTerms: boolean;
 }
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 6;
 const STORAGE_KEY = "kompar-quiz-data";
 
 interface QuizProps {
@@ -39,7 +37,7 @@ interface QuizProps {
 
 const Quiz = ({ onClose }: QuizProps) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [disqualified, setDisqualified] = useState<"budget" | "timeline" | null>(null);
+  const [disqualified, setDisqualified] = useState<"budget" | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
@@ -67,13 +65,12 @@ const Quiz = ({ onClose }: QuizProps) => {
         "Étape 1: Type de projet",
         "Étape 2: Localisation",
         "Étape 3: Budget",
-        "Étape 4: Timeline",
-        "Étape 5: Détails",
-        "Étape 6: Coordonnées",
+        "Étape 4: Détails",
+        "Étape 5: Coordonnées",
         "Confirmation"
       ];
       
-      if (currentStep <= 7) {
+      if (currentStep <= 6) {
         try {
           await supabase.from("quiz_analytics").insert({
             session_id: sessionId,
@@ -100,7 +97,6 @@ const Quiz = ({ onClose }: QuizProps) => {
           location: "",
           city: "",
           budget: "",
-          timeline: "",
           projectDetails: "",
           photos: [],
           firstName: "",
@@ -116,7 +112,6 @@ const Quiz = ({ onClose }: QuizProps) => {
       location: "",
       city: "",
       budget: "",
-      timeline: "",
       projectDetails: "",
       photos: [],
       firstName: "",
@@ -140,28 +135,12 @@ const Quiz = ({ onClose }: QuizProps) => {
         }
         break;
       case 4:
-        if (!quizData.timeline) {
-          toast.error("Veuillez sélectionner un délai");
-          return false;
-        }
-        if (quizData.timeline === "more-6-months") {
-          setDisqualified("timeline");
-          // Track disqualification
-          supabase.from("quiz_analytics").insert({
-            session_id: sessionId,
-            step_number: 0,
-            step_name: "Disqualifié: Timeline",
-          });
-          return false;
-        }
-        break;
-      case 5:
         if (!quizData.projectDetails || quizData.projectDetails.length < 50) {
           toast.error("Veuillez fournir une description d'au moins 50 caractères");
           return false;
         }
         break;
-      case 6:
+      case 5:
         if (!quizData.firstName || !quizData.lastName || !quizData.email || !quizData.phone) {
           toast.error("Veuillez remplir tous les champs obligatoires");
           return false;
@@ -182,7 +161,7 @@ const Quiz = ({ onClose }: QuizProps) => {
   const handleNext = async () => {
     if (!validateStep()) return;
 
-    if (currentStep === 6) {
+    if (currentStep === 5) {
       await handleSubmit();
     } else {
       setCurrentStep(prev => prev + 1);
@@ -216,7 +195,6 @@ const Quiz = ({ onClose }: QuizProps) => {
         location: quizData.location,
         city: quizData.city,
         budget: quizData.budget,
-        timeline: quizData.timeline,
         projectDetails: quizData.projectDetails,
         photos: quizData.photos,
         firstName: quizData.firstName,
@@ -237,7 +215,6 @@ const Quiz = ({ onClose }: QuizProps) => {
         budget: quizData.budget,
         project_details: quizData.projectDetails,
         photos: quizData.photos,
-        timeline: quizData.timeline,
         accepted_terms: quizData.acceptedTerms,
         pool_status: "pending_approval"
       });
@@ -253,7 +230,7 @@ const Quiz = ({ onClose }: QuizProps) => {
       }
 
       localStorage.removeItem(STORAGE_KEY);
-      setCurrentStep(7);
+      setCurrentStep(6);
       toast.success("Votre demande a été envoyée avec succès!");
     } catch (error) {
       console.error("Error submitting lead:", error);
@@ -266,11 +243,7 @@ const Quiz = ({ onClose }: QuizProps) => {
   const handleBack = () => {
     if (disqualified) {
       setDisqualified(null);
-      if (disqualified === "budget") {
-        setCurrentStep(3);
-      } else {
-        setCurrentStep(4);
-      }
+      setCurrentStep(3);
     } else if (currentStep > 1) {
       setCurrentStep(prev => prev - 1);
     }
@@ -282,7 +255,6 @@ const Quiz = ({ onClose }: QuizProps) => {
       location: "",
       city: "",
       budget: "",
-      timeline: "",
       projectDetails: "",
       photos: [],
       firstName: "",
@@ -367,20 +339,6 @@ const Quiz = ({ onClose }: QuizProps) => {
           )}
 
           {currentStep === 4 && (
-            <StepFour
-              value={quizData.timeline}
-              onChange={(value) => {
-                setQuizData({ ...quizData, timeline: value });
-                if (value === "more-6-months") {
-                  setTimeout(() => setDisqualified("timeline"), 300);
-                } else {
-                  setTimeout(() => setCurrentStep(5), 300);
-                }
-              }}
-            />
-          )}
-
-          {currentStep === 5 && (
             <StepFive
               details={quizData.projectDetails}
               photos={quizData.photos}
@@ -389,7 +347,7 @@ const Quiz = ({ onClose }: QuizProps) => {
             />
           )}
 
-          {currentStep === 6 && (
+          {currentStep === 5 && (
             <StepSix
               firstName={quizData.firstName}
               lastName={quizData.lastName}
@@ -404,9 +362,9 @@ const Quiz = ({ onClose }: QuizProps) => {
             />
           )}
 
-          {currentStep === 7 && <StepSeven onRestart={handleRestart} />}
+          {currentStep === 6 && <StepSeven onRestart={handleRestart} />}
 
-          {currentStep < 7 && currentStep !== 1 && currentStep !== 3 && currentStep !== 4 && (
+          {currentStep < 6 && currentStep !== 1 && currentStep !== 3 && (
             <div className="flex justify-between gap-2 md:gap-4 mt-4 md:mt-8">
               <Button
                 onClick={handleBack}
@@ -426,13 +384,13 @@ const Quiz = ({ onClose }: QuizProps) => {
                 disabled={isSubmitting}
                 className="text-sm md:text-base h-10 md:h-auto"
               >
-                {currentStep === 6 ? (isSubmitting ? "Envoi..." : "Envoyer") : "Suivant"}
-                {currentStep < 6 && <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />}
+                {currentStep === 5 ? (isSubmitting ? "Envoi..." : "Envoyer") : "Suivant"}
+                {currentStep < 5 && <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />}
               </Button>
             </div>
           )}
           
-          {(currentStep === 1 || currentStep === 3 || currentStep === 4) && (
+          {(currentStep === 1 || currentStep === 3) && (
             <div className="flex justify-start gap-2 md:gap-4 mt-4 md:mt-8">
               <Button
                 onClick={handleBack}
