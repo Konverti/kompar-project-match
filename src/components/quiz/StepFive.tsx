@@ -124,8 +124,9 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">
           Parlez-nous de votre projet
         </h2>
-        <p className="text-xs md:text-base text-muted-foreground">
-          Plus vous donnez de détails, plus les soumissions seront précises
+        <p className="text-xs md:text-sm text-muted-foreground max-w-xl mx-auto">
+          Plus vous donnez de détails, plus les soumissions seront précises et adaptées à vos besoins. 
+          Une description complète permet aux entrepreneurs de bien comprendre votre vision et d'éviter les surprises.
         </p>
       </div>
       
@@ -149,13 +150,13 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
           </div>
           <Textarea
             id="details"
-            placeholder="Décrivez votre projet en détail: dimensions, matériaux souhaités, style recherché, contraintes particulières, etc."
+            placeholder="Exemple: Je souhaite rénover ma cuisine de 12 pieds x 14 pieds. Actuellement, les armoires sont en mélamine blanc et j'aimerais les remplacer par des armoires en bois de style shaker. Le plancher est en céramique mais je voudrais installer du plancher flottant. Les comptoirs en stratifié doivent être changés pour du quartz blanc. L'évier est situé sous la fenêtre et je souhaite le conserver à cet endroit. Le budget prévu inclut également le remplacement des électroménagers."
             value={details}
             onChange={(e) => onDetailsChange(e.target.value)}
             className="min-h-[120px] md:min-h-[200px] text-sm md:text-base"
           />
           <p className="text-xs md:text-sm text-muted-foreground">
-            {details.length} caractères (minimum 200 recommandé)
+            {details.length} caractères (minimum 25, mais plus de détails = meilleures soumissions)
           </p>
         </div>
         

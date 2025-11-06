@@ -135,8 +135,8 @@ const Quiz = ({ onClose }: QuizProps) => {
         }
         break;
       case 4:
-        if (!quizData.projectDetails || quizData.projectDetails.length < 50) {
-          toast.error("Veuillez fournir une description d'au moins 50 caractères");
+        if (!quizData.projectDetails || quizData.projectDetails.length < 25) {
+          toast.error("Veuillez fournir une description d'au moins 25 caractères");
           return false;
         }
         break;
