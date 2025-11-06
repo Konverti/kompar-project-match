@@ -150,7 +150,7 @@ const StepFive = ({ details, photos, onDetailsChange, onPhotosChange }: StepFive
           </div>
           <Textarea
             id="details"
-            placeholder="Exemple: Je souhaite rénover ma cuisine de 12 pieds x 14 pieds. Actuellement, les armoires sont en mélamine blanc et j'aimerais les remplacer par des armoires en bois de style shaker. Le plancher est en céramique mais je voudrais installer du plancher flottant. Les comptoirs en stratifié doivent être changés pour du quartz blanc. L'évier est situé sous la fenêtre et je souhaite le conserver à cet endroit. Le budget prévu inclut également le remplacement des électroménagers."
+            placeholder="Exemple: Je souhaite rénover ma cuisine de 12 pieds x 14 pieds. Actuellement, les armoires sont en mélamine blanc et j'aimerais les remplacer par des armoires en bois de style shaker. Le plancher est en céramique mais je voudrais installer du plancher flottant. Les comptoirs en stratifié doivent être changés pour du quartz blanc. L'évier est situé sous la fenêtre et je souhaite le conserver à cet endroit."
             value={details}
             onChange={(e) => onDetailsChange(e.target.value)}
             className="min-h-[120px] md:min-h-[200px] text-sm md:text-base"
