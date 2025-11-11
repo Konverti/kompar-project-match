@@ -25,11 +25,11 @@ const StepThree = ({ value, onChange, projectType }: StepThreeProps) => {
 
   const getRecommendedBudget = () => {
     switch (projectType) {
-      case "bathroom":
+      case "Salle de bain":
         return "14 000$ - 16 000$";
-      case "kitchen":
+      case "Cuisine":
         return "16 000$ - 18 000$";
-      case "basement":
+      case "Sous-sol":
         return "14 000$ - 16 000$";
       default:
         return null;
