@@ -335,6 +335,7 @@ const Quiz = ({ onClose }: QuizProps) => {
                   setTimeout(() => setCurrentStep(4), 300);
                 }
               }}
+              projectType={quizData.projectType}
             />
           )}
 

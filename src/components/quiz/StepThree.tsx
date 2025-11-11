@@ -3,9 +3,10 @@ import { DollarSign } from "lucide-react";
 interface StepThreeProps {
   value: string;
   onChange: (value: string) => void;
+  projectType: string;
 }
 
-const StepThree = ({ value, onChange }: StepThreeProps) => {
+const StepThree = ({ value, onChange, projectType }: StepThreeProps) => {
   const budgetRanges = [
     { id: "less-12k", label: "Moins de 12 000$" },
     { id: "12k-14k", label: "12 000$ - 14 000$" },
@@ -21,6 +22,21 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
     { id: "35k-40k", label: "35 000$ - 40 000$" },
     { id: "more-40k", label: "40 000$ et plus" }
   ];
+
+  const getRecommendedBudget = () => {
+    switch (projectType) {
+      case "bathroom":
+        return "14 000$ - 16 000$";
+      case "kitchen":
+        return "16 000$ - 18 000$";
+      case "basement":
+        return "14 000$ - 16 000$";
+      default:
+        return null;
+    }
+  };
+
+  const recommendedBudget = getRecommendedBudget();
   
   return (
     <div className="space-y-8 animate-fade-in max-w-2xl mx-auto">
@@ -33,6 +49,16 @@ const StepThree = ({ value, onChange }: StepThreeProps) => {
         <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           Quel est votre budget estimé?
         </h2>
+        {recommendedBudget && (
+          <div className="bg-secondary/50 border-l-4 border-secondary p-4 rounded-r-lg">
+            <p className="text-sm font-semibold text-foreground mb-1">
+              💰 Budget minimum recommandé
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Pour ce type de projet: <strong className="text-foreground">{recommendedBudget}</strong>
+            </p>
+          </div>
+        )}
         <div className="bg-accent-light border-l-4 border-primary p-4 rounded-r-lg">
           <p className="text-sm text-foreground font-medium mb-2">
             💡 Pourquoi c'est important?
