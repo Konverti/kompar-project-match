@@ -1,6 +1,6 @@
 import { CheckCircle } from "lucide-react";
 
-const ThankYouPage = () => {
+const ThankYouKitchenPage = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="text-center max-w-md">
@@ -9,11 +9,11 @@ const ThankYouPage = () => {
           Merci !
         </h1>
         <p className="text-muted-foreground text-lg">
-          Nous avons bien reçu vos informations et nous communiquerons avec vous sous peu.
+          Nous avons bien reçu vos informations. Nous proposerons votre projet aux meilleurs entrepreneurs pour votre projet.
         </p>
       </div>
     </div>
   );
 };
 
-export default ThankYouPage;
+export default ThankYouKitchenPage;
