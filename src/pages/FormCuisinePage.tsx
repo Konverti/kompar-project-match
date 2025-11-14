@@ -2,10 +2,26 @@ import { useEffect } from "react";
 
 const FormCuisinePage = () => {
   useEffect(() => {
-    // Facebook Pixel tracking
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'ViewContent');
-    }
+    // Écouter les événements de soumission du formulaire Typeform
+    const handleMessage = (event: MessageEvent) => {
+      // Vérifier que le message vient de Typeform
+      if (event.data && typeof event.data === 'object') {
+        // Typeform envoie un événement 'form-submit' quand le formulaire est soumis
+        if (event.data.type === 'form-submit') {
+          console.log('Formulaire Typeform soumis, déclenchement du pixel Facebook');
+          // Déclencher le pixel Facebook uniquement après soumission complète
+          if (typeof window !== 'undefined' && (window as any).fbq) {
+            (window as any).fbq('track', 'Lead');
+          }
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
   }, []);
 
   return (
