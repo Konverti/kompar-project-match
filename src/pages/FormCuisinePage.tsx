@@ -8,10 +8,10 @@ const FormCuisinePage = () => {
       if (event.data && typeof event.data === 'object') {
         // Typeform envoie un événement 'form-submit' quand le formulaire est soumis
         if (event.data.type === 'form-submit') {
-          console.log('Formulaire Typeform soumis, déclenchement du pixel Facebook');
-          // Déclencher le pixel Facebook uniquement après soumission complète
+          console.log('Formulaire Typeform soumis, déclenchement du pixel Facebook Lead - cuisine');
+          // Déclencher le pixel Facebook Lead avec paramètre cuisine
           if (typeof window !== 'undefined' && (window as any).fbq) {
-            (window as any).fbq('track', 'Lead');
+            (window as any).fbq('track', 'Lead', {content_name: 'cuisine'});
           }
         }
       }
